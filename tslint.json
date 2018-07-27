@@ -8,6 +8,10 @@
   },
   "rules": {
     "no-console": false,
-    "import-sources-order": "any"
+    "ordered-inputs": [true,{
+      "import-sources-order": "any",
+      "named-imports-order": "any",
+      "grouped-imports": false
+    }]
   } 
 }
