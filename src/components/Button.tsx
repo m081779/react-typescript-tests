@@ -1,17 +1,14 @@
 import * as React from 'react';
 
 interface IButtonProps {
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => boolean;
-  // children?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   [propName:string]: any;
 }
 
-class Button extends React.Component<IButtonProps>{
-  public render() {
-    return (
-      <button {...this.props} onClick={this.props.onClick}>{this.props.children}</button>
-    );
-  }
+const Button:React.SFC<IButtonProps> = (props) => {
+  return (
+    <button {...props} onClick={props.onClick}>{props.children}</button>
+  );
 }
 
 export default Button;

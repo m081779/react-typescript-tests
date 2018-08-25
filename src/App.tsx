@@ -5,33 +5,41 @@ import Counter from './components/Counter';
 
 interface IAppState {
   count: number;
+  incrementer: number
 }
 
 class App extends React.Component<{},IAppState> {
   public state: IAppState = {
-    count: 0
+    count: 0,
+    incrementer: 1
   }
 
-  public handleClickIncrement = (event: React.MouseEvent<HTMLButtonElement>):boolean => {
+  public handleClickIncrement = (event: React.MouseEvent<HTMLButtonElement>) => {
     let count: number = this.state.count;
-    count++;
+    count+=this.state.incrementer;
     this.setState({count});
-    return true;
   }
 
-  public handleClickDecrement = (event: React.MouseEvent<HTMLButtonElement>):boolean => {
+  public handleClickDecrement = (event: React.MouseEvent<HTMLButtonElement>) => {
     let count: number = this.state.count;
-    if (count>0){ count-- }
+    const { incrementer } = this.state;
+    count - incrementer > 0 ?  count -= incrementer : count = 0
     this.setState({count});
-    return true;
+  }
+
+  public countByFive = () => {
+    this.setState(prevState => (
+      {incrementer: prevState.incrementer !== 5 ? 5 : 1}
+    ))
   }
 
   public render() {
     return (
       <>
         <Counter count={this.state.count}/>
-        <Button onClick={this.handleClickIncrement}>Increment</Button>
-        <Button onClick={this.handleClickDecrement}>Decrement</Button>
+        <Button className='increment' onClick={this.handleClickIncrement}>Increment</Button>
+        <Button className='decrement' onClick={this.handleClickDecrement}>Decrement</Button>
+        <Button className='countByFive' onClick={this.countByFive}>{this.state.incrementer !== 5 ? 'Count By 5' : 'Count By 1'}</Button>
       </>
     );
   }

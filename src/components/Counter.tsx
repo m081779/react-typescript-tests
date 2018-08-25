@@ -4,12 +4,10 @@ interface ICounterProps {
   count: number;
 }
 
-class Counter extends React.Component<ICounterProps> {
-  public render() {
-    return (
-      <h2>Count: {this.props.count}</h2>
-    );
-  }
+const Counter:React.SFC<ICounterProps> = ({ count }) => {
+  return (
+    <h2>Count: {count}</h2>
+  );
 }
 
 export default Counter;
